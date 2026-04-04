@@ -1,4 +1,6 @@
-class PajakPPN:
+from modules.KomponenHarga import KomponenHarga
+
+class PajakPPN(KomponenHarga):
     def __init__(self, subtotal):
         super().__init__(subtotal)
         self.nilai_pajak = self.subtotal * 0.1
