@@ -10,16 +10,17 @@ class TransaksiPOS:
         self.total_tagihan += harga
         return f"Item '{nama_item}' dengan harga {harga} telah ditambahkan ke pesanan."
     def cetak_struk(self):
-        invoice = f"=== INVOICE POS ===\n"
-        invoice += f"Pelanggan : {self.pelanggan}\n"
-        invoice += f"Meja      : {self.meja}\n"
-        invoice += "-------------------\n"
-        invoice += "Daftar Pesanan:\n"
+        invoice = "\n" + "=" * 40 + "\n"
+        invoice += f"       STRUK PEMBAYARAN - MEJA {self.meja}\n"
+        invoice += "=" * 40 + "\n"
+        invoice += f"Pelanggan: {self.pelanggan}\n"
+        invoice += "-" * 40 + "\n"
         for pesanan in self.daftar_pesanan:
-            invoice += f"- {pesanan['item']:<15} : Rp {pesanan['harga']}\n"
-        invoice += "-------------------\n"
-        invoice += f"===Total Tagihan===: Rp {self.total_tagihan}\n"
-        invoice += "==================="
+            subtotal_item = pesanan['jumlah'] * pesanan['harga_satuan']
+            invoice += f"{pesanan['nama_makanan']:<20}x{pesanan['jumlah']:>2}  Rp{subtotal_item:>11,}\n"
+        invoice += "-" * 40 + "\n"
+        invoice += f"{'TOTAL TAGIHAN':<23}  Rp{self.total_tagihan:>11,}\n"
+        invoice += "=" * 40
         return invoice
     def proses_pembayaran(self, jumlah_bayar):
         if jumlah_bayar >= self.total_tagihan:
