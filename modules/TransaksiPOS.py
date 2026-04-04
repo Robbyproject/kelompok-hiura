@@ -18,7 +18,7 @@ class TransaksiPOS:
         for pesanan in self.daftar_pesanan:
             invoice += f"- {pesanan['item']:<15} : Rp {pesanan['harga']}\n"
         invoice += "-------------------\n"
-        invoice += f"Total Tagihan     : Rp {self.total_tagihan}\n"
+        invoice += f"===Total Tagihan===: Rp {self.total_tagihan}\n"
         invoice += "==================="
         return invoice
     def proses_pembayaran(self, jumlah_bayar):
