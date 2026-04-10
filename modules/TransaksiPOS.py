@@ -1,6 +1,6 @@
 from modules.PajakPPN import PajakPPN
 
-class TransaksiPOS(PajakPPN):
+class TransaksiPOS(PajakPPN): #haris hama
     def __init__(self, nama_pelanggan, nomor_meja):
         super().__init__(0)
         self.nama_pelanggan = nama_pelanggan
