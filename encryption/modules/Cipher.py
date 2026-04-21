@@ -9,7 +9,7 @@ class Cipher:
     @plain_text.setter
     def plain_text(self, text):
         if text != "":
-            self.__radius = text
+            self.__plain_text = text
         else:
             raise ValueError("Text cannot be empty")
         
