@@ -3,13 +3,13 @@ from .Penulis import Penulis
 
 class ManajerPerpustakaan:
 
-    def _init_(self):
+    def __init__(self):
         self.koleksi = []
         self.terurut = False
 
     def validasi_id_unik(self, id_baru): # return bool,,, Robby
         for buku in self.koleksi:
-            if buku.id == id_baru:
+            if buku.id_item == id_baru: # dibaca mas nama attribute nya id_item bukan id doang -haris
                 return False
         return True
 
@@ -51,15 +51,36 @@ class ManajerPerpustakaan:
 
     def urutkan_koleksi(self): # return void, bubble sort,,,, Robby
         if self.terurut:
-            print("Koleksi sudah terurut.")
+            print("[SISTEM] Koleksi sudah terurut.")
             return
         n = len(self.koleksi)
         for i in range(n):
             for j in range(0, n-i-1):
-                if self.koleksi[j].id > self.koleksi[j+1].id:
+                if self.koleksi[j].id_item > self.koleksi[j+1].id_item:
                     self.koleksi[j], self.koleksi[j+1] = self.koleksi[j+1], self.koleksi[j]
         self.terurut = True
-        print("Koleksi berhasil diurutkan berdasarkan ID.")
+        print("[SISTEM] Koleksi berhsil diurutkan.")
 
     def cari_buku(self, id_target): # return object dari class Buku / None, binary search
-        return 
+        if not self.terurut:
+            print("\n[Peringatan] Mohon untuk mengurutkan data terlebih dahulu!")
+            return None
+
+        low = 0
+        high = len(self.koleksi) - 1
+
+        while low <= high:
+            # Tentukan tengah
+            mid = (low + high) // 2
+            
+            # cek targetnya ditengah ga
+            if self.koleksi[mid].id_item == id_target:
+                return self.koleksi[mid]
+            # Target lebih gede, buang bagian kiri
+            elif self.koleksi[mid].id_item < id_target:
+                low = mid + 1
+            # Target lebih gede, buang bagian kanan
+            else:
+                high = mid - 1
+        
+        return None
